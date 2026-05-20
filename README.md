@@ -39,7 +39,7 @@ repositories {
 
 ```kotlin
 dependencies {
-    implementation("io.github.dev778g-me:korner:1.1.0")
+    implementation("io.github.dev778g-me:korner:2.0.0")
 }
 ```
 
