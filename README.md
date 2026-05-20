@@ -1,35 +1,112 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
+# Korner
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+Smooth rounded corners and squircles for Compose Multiplatform.
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Korner is a lightweight Kotlin Multiplatform library for creating beautiful smooth corner shapes (superellipses/squircles) with customizable radius and smoothness values for each individual corner.
 
-### Running the apps
+Supports:
+- Android
+- iOS
+- Desktop
+- WASM/Web
 
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
-
-- Android app: `./gradlew :androidApp:assembleDebug`
-- Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
-- Web app:
-  - Wasm target (faster, modern browsers): `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
-  - JS target (slower, supports older browsers): `./gradlew :webApp:jsBrowserDevelopmentRun`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+Bashed on the original smooth corner implementation from:
+https://github.com/racra/smooth-corner-rect-android-compose
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+## Features
 
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+- Smooth iOS-style corners
+- Individual corner radius support
+- Custom smoothness per corner
+- Compose Multiplatform compatible
+- Lightweight and easy to use
+- Works with any Compose UI component
+
+---
+
+## Installation
+
+### Gradle
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+```
+
+```kotlin
+dependencies {
+    implementation("io.github.dev778g-me:korner:1.0.0")
+}
+```
+
+---
+
+## Usage
+
+### Basic Smooth Corner Shape
+
+```kotlin
+Box(
+    modifier = Modifier
+        .size(200.dp)
+        .background(
+            color = Color(0xFFF6EABE),
+            shape = SmoothCornerShape(
+                radius = 32.dp,
+                smoothness = 100
+            )
+        )
+)
+```
+
+---
+
+### Individual Corner Configuration
+
+```kotlin
+Box(
+    modifier = Modifier
+        .size(200.dp)
+        .background(
+            color = Color(0xFFF6EABE),
+            shape = SmoothCornerShape(
+                topStartRadius = 40.dp,
+                topStartSmoothness = 100,
+
+                topEndRadius = 12.dp,
+                topEndSmoothness = 60,
+
+                bottomEndRadius = 40.dp,
+                bottomEndSmoothness = 100,
+
+                bottomStartRadius = 12.dp,
+                bottomStartSmoothness = 60
+            )
+        )
+)
+```
+
+---
+
+## Why Korner?
+
+Traditional rounded rectangles use simple circular arcs.
+
+Korner generates smooth superellipse-style curves that look more natural and modern, similar to the corners used in iOS and modern design systems.
+
+---
+
+
+---
+## Attribution
+
+Korner is based on and adapted from:
+https://github.com/racra/smooth-corner-rect-android-compose
+
+Original work copyright (c) racra
+Licensed under the MIT License.
+
+
