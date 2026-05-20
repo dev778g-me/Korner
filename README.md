@@ -97,7 +97,7 @@ Traditional rounded rectangles use simple circular arcs.
 
 Korner generates smooth superellipse-style curves that look more natural and modern, similar to the corners used in iOS and modern design systems.
 
----
+
 
 
 ---
