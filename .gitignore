@@ -6,6 +6,7 @@ xcuserdata
 !src/**/build/
 local.properties
 gradle.properties
+androidApp/release
 .idea
 .DS_Store
 captures
