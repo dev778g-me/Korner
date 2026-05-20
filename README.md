@@ -23,7 +23,6 @@ https://github.com/racra/smooth-corner-rect-android-compose
 - Custom smoothness per corner
 - Type-safe corner smoothing API
 - Compose Multiplatform compatible
-- Lightweight and easy to use
 - Works with any Compose UI component
 
 ---
