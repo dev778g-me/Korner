@@ -1,10 +1,17 @@
-package racra.compose.smooth_corner_rect_library
+package com.dev.koretesting
 
-import kotlin.math.*
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.min
+import kotlin.math.sin
+import kotlin.math.sqrt
+import kotlin.math.tan
+
+fun toRadians(degrees: Double): Double = degrees * PI / 180
 
 /**
  * A class representing the points required to draw the curves in a smooth corner.
- * A smooth corner is made up of an arc surrounded by 2 diagonally symmetrical bezier curves.
+ * A smooth corner is made up of an arc surrounded by 2 diagonally symmetrical Bézier curves.
  * Documentation on the makeup of a smooth curve:
  *
  * @param cornerRadius the size of the corners
@@ -18,6 +25,7 @@ internal class SmoothCorner(
 ) {
 
     init {
+
         require(smoothnessAsPercent >= 0) {
             "The value for smoothness can never be negative."
         }
@@ -38,38 +46,36 @@ internal class SmoothCorner(
     private val interpolationMultiplier =
         (radius - maximumCurveStartDistanceFromVertex / 2) / (maximumCurveStartDistanceFromVertex / 2)
 
-    // Angle at second control point of the bezier curves
+    // Angle at second control point of the Bézier curves
     private val angleAlpha =
         if (shouldCurveInterpolate)
-            Math.toRadians(45.0 * smoothness).toFloat()
+            toRadians(45.0 * smoothness).toFloat()
         else
-            Math.toRadians(45.0 * smoothness * (1 - interpolationMultiplier)).toFloat()
+            toRadians(45.0 * smoothness * (1 - interpolationMultiplier)).toFloat()
 
-    // Angle which dictates how much of the curve is going to be a slice of a circle
     private val angleBeta =
         if (shouldCurveInterpolate)
-            Math.toRadians(90.0 * (1.0 - smoothness)).toFloat()
+            toRadians(90.0 * (1.0 - smoothness)).toFloat()
         else
-            Math.toRadians(90.0 * (1 - smoothness * (1 - interpolationMultiplier))).toFloat()
+            toRadians(90.0 * (1 - smoothness * (1 - interpolationMultiplier))).toFloat()
 
-    private val angleTheta = ((Math.toRadians(90.0) - angleBeta) / 2.0).toFloat()
+    private val angleTheta = ((toRadians(90.0) - angleBeta) / 2.0).toFloat()
 
-    // Distance from second control point to end of Bezier curves
+    // Distance from second control point to end of  Bézier curves
     private val distanceE = radius * tan(angleTheta / 2)
 
-    // Distances in the x and y axis used to position end of Bezier
-    // curves relative to it's second control point
+    // Distances in the x and y-axis used to position end oBézier curves relative to it's second control point
     private val distanceC = distanceE * cos(angleAlpha)
     private val distanceD = distanceC * tan(angleAlpha)
 
-    // Distances used to position second control point of Bezier curves
+    // Distances used to position second control point of  Bézier curves
     // relative to their first control point
     private val distanceK = sin(angleBeta / 2) * radius
     private val distanceL = (distanceK * sqrt(2.0)).toFloat()
     private val distanceB =
         ((curveStartDistance - distanceL) - (1 + tan(angleAlpha)) * distanceC) / 3
 
-    // Distance used to position first control point of Bezier curves
+    // Distance used to position first control point of  Bézier curves
     // relative to their origin
     private val distanceA = 2 * distanceB
 

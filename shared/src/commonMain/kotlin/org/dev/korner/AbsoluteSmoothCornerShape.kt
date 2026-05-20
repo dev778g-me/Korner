@@ -1,4 +1,4 @@
-package com.dev.test
+package com.dev.koretesting
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
@@ -8,8 +8,6 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import racra.compose.smooth_corner_rect_library.SmoothCorner
-import java.lang.Math.toRadians
 import kotlin.math.*
 
 /**
@@ -102,8 +100,8 @@ data class AbsoluteSmoothCornerShape(
                             bottom = selectedSmoothCorner.arcSection.radius * 2
                         ),
                         startAngleRadians =
-                        (toRadians(180.0) + selectedSmoothCorner.arcSection.arcStartAngle)
-                            .toFloat(),
+                            (toRadians(180.0) + selectedSmoothCorner.arcSection.arcStartAngle)
+                                .toFloat(),
                         sweepAngleRadians = selectedSmoothCorner.arcSection.arcSweepAngle,
                         forceMoveTo = false
                     )
@@ -147,8 +145,8 @@ data class AbsoluteSmoothCornerShape(
                             bottom = selectedSmoothCorner.arcSection.radius * 2
                         ),
                         startAngleRadians =
-                        (toRadians(270.0) + selectedSmoothCorner.arcSection.arcStartAngle)
-                            .toFloat(),
+                            (toRadians(270.0) + selectedSmoothCorner.arcSection.arcStartAngle)
+                                .toFloat(),
                         sweepAngleRadians = selectedSmoothCorner.arcSection.arcSweepAngle,
                         forceMoveTo = false
                     )
@@ -192,8 +190,8 @@ data class AbsoluteSmoothCornerShape(
                             bottom = size.height
                         ),
                         startAngleRadians =
-                        (toRadians(0.0) + selectedSmoothCorner.arcSection.arcStartAngle)
-                            .toFloat(),
+                            (toRadians(0.0) + selectedSmoothCorner.arcSection.arcStartAngle)
+                                .toFloat(),
                         sweepAngleRadians = selectedSmoothCorner.arcSection.arcSweepAngle,
                         forceMoveTo = false
                     )
@@ -237,8 +235,8 @@ data class AbsoluteSmoothCornerShape(
                             bottom = size.height
                         ),
                         startAngleRadians =
-                        (toRadians(90.0) + selectedSmoothCorner.arcSection.arcStartAngle)
-                            .toFloat(),
+                            (toRadians(90.0) + selectedSmoothCorner.arcSection.arcStartAngle)
+                                .toFloat(),
                         sweepAngleRadians = selectedSmoothCorner.arcSection.arcSweepAngle,
                         forceMoveTo = false
                     )
