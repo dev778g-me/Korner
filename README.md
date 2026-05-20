@@ -2,7 +2,7 @@
 
 Smooth rounded corners and squircles for Compose Multiplatform.
 
-Korner is a lightweight Kotlin Multiplatform library for creating beautiful smooth corner shapes (superellipses/squircles) with customizable radius and smoothness values for each individual corner.
+Korner is a Compose Multiplatform library for creating beautiful smooth corner shapes (superellipses/squircles) with customizable radius and smoothness values for each individual corner.
 
 Supports:
 - Android
