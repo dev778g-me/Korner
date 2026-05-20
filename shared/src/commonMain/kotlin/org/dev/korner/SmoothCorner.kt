@@ -1,4 +1,4 @@
-package com.dev.koretesting
+package org.dev.korner
 
 import kotlin.math.PI
 import kotlin.math.cos

@@ -1,4 +1,4 @@
-package com.dev.koretesting
+package org.dev.korner
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kotlin.jvm.JvmInline
 import kotlin.math.*
 
 /**
@@ -17,29 +18,29 @@ import kotlin.math.*
  * This shape will not automatically mirror the corners in [LayoutDirection.Rtl], use
  * TODO [SmoothCornerShape] for the layout direction aware version of this shape.
  *
- * @param cornerRadiusTL the size of the top left corner
- * @param smoothnessAsPercentTL a percentage representing how smooth the top left corner will be
- * @param cornerRadiusTR the size of the top right corner
- * @param smoothnessAsPercentTR a percentage representing how smooth the top right corner will be
- * @param cornerRadiusBR the size of the bottom right corner
- * @param smoothnessAsPercentBR a percentage representing how smooth the bottom right corner will be
- * @param cornerRadiusBL the size of the bottom left corner
- * @param smoothnessAsPercentBL a percentage representing how smooth the bottom left corner will be
+ * @param topLeftRadius the size of the top left corner
+ * @param topLeftCornerSmoothing a percentage representing how smooth the top left corner will be
+ * @param topRightRadius the size of the top right corner
+ * @param topRightCornerSmoothing a percentage representing how smooth the top right corner will be
+ * @param bottomRightRadius the size of the bottom right corner
+ * @param bottomRightCornerSmoothing a percentage representing how smooth the bottom right corner will be
+ * @param bottomLeftRadius the size of the bottom left corner
+ * @param bottomLeftCornerSmoothing a percentage representing how smooth the bottom left corner will be
  */
 data class AbsoluteSmoothCornerShape(
-    private val cornerRadiusTL: Dp = 0.dp,
-    private val smoothnessAsPercentTL: Int = 60,
-    private val cornerRadiusTR: Dp = 0.dp,
-    private val smoothnessAsPercentTR: Int = 60,
-    private val cornerRadiusBR: Dp = 0.dp,
-    private val smoothnessAsPercentBR: Int = 60,
-    private val cornerRadiusBL: Dp = 0.dp,
-    private val smoothnessAsPercentBL: Int = 60
+    private val topLeftRadius: Dp ,
+    private val topLeftCornerSmoothing: CornerSmoothing = CornerSmoothing.Continuous,
+    private val topRightRadius: Dp ,
+    private val topRightCornerSmoothing: CornerSmoothing = CornerSmoothing.Continuous,
+    private val bottomRightRadius: Dp ,
+    private val bottomRightCornerSmoothing: CornerSmoothing = CornerSmoothing.Continuous,
+    private val bottomLeftRadius: Dp ,
+    private val bottomLeftCornerSmoothing: CornerSmoothing = CornerSmoothing.Continuous
 ) : CornerBasedShape(
-    topStart = CornerSize(cornerRadiusTL),
-    topEnd = CornerSize(cornerRadiusTR),
-    bottomEnd = CornerSize(cornerRadiusBR),
-    bottomStart = CornerSize(cornerRadiusBL)
+    topStart = CornerSize(topLeftRadius),
+    topEnd = CornerSize(topRightRadius),
+    bottomEnd = CornerSize(bottomRightRadius),
+    bottomStart = CornerSize(bottomLeftRadius)
 ) {
     override fun createOutline(
         size: Size,
@@ -52,8 +53,8 @@ data class AbsoluteSmoothCornerShape(
         topStart + topEnd + bottomEnd + bottomStart == 0.0f -> {
             Outline.Rectangle(size.toRect())
         }
-        smoothnessAsPercentTL + smoothnessAsPercentTR +
-                smoothnessAsPercentBR + smoothnessAsPercentBL == 0 -> {
+        topLeftCornerSmoothing.percent + topRightCornerSmoothing.percent +
+                bottomRightCornerSmoothing.percent + bottomLeftCornerSmoothing.percent == 0 -> {
             Outline.Rounded(
                 RoundRect(
                     rect = size.toRect(),
@@ -71,9 +72,9 @@ data class AbsoluteSmoothCornerShape(
                     val smoothCornersMap = mutableMapOf<String, SmoothCorner>()
 
                     var selectedSmoothCorner =
-                        smoothCornersMap["$topStart - $smoothnessAsPercentTL"] ?: SmoothCorner(
+                        smoothCornersMap["$topStart - $topLeftCornerSmoothing"] ?: SmoothCorner(
                             topStart,
-                            smoothnessAsPercentTL,
+                            topLeftCornerSmoothing.percent,
                             halfOfShortestSide
                         )
 
@@ -116,9 +117,9 @@ data class AbsoluteSmoothCornerShape(
                     )
 
                     selectedSmoothCorner =
-                        smoothCornersMap["$topEnd - $smoothnessAsPercentTR"] ?: SmoothCorner(
+                        smoothCornersMap["$topEnd - $topRightCornerSmoothing"] ?: SmoothCorner(
                             topEnd,
-                            smoothnessAsPercentTR,
+                            topRightCornerSmoothing.percent,
                             halfOfShortestSide
                         )
 
@@ -161,9 +162,9 @@ data class AbsoluteSmoothCornerShape(
                     )
 
                     selectedSmoothCorner =
-                        smoothCornersMap["$bottomEnd - $smoothnessAsPercentBR"] ?: SmoothCorner(
+                        smoothCornersMap["$bottomEnd - $bottomRightCornerSmoothing"] ?: SmoothCorner(
                             bottomEnd,
-                            smoothnessAsPercentBR,
+                            bottomRightCornerSmoothing.percent,
                             halfOfShortestSide
                         )
 
@@ -206,9 +207,9 @@ data class AbsoluteSmoothCornerShape(
                     )
 
                     selectedSmoothCorner =
-                        smoothCornersMap["$bottomStart - $smoothnessAsPercentBL"] ?: SmoothCorner(
+                        smoothCornersMap["$bottomStart - $bottomLeftCornerSmoothing"] ?: SmoothCorner(
                             bottomStart,
-                            smoothnessAsPercentBL,
+                            bottomLeftCornerSmoothing.percent,
                             halfOfShortestSide
                         )
 
@@ -263,14 +264,14 @@ data class AbsoluteSmoothCornerShape(
         bottomEnd: CornerSize,
         bottomStart: CornerSize
     ) = AbsoluteSmoothCornerShape(
-        cornerRadiusTL,
-        smoothnessAsPercentTL,
-        cornerRadiusTR,
-        smoothnessAsPercentTR,
-        cornerRadiusBR,
-        smoothnessAsPercentBR,
-        cornerRadiusBL,
-        smoothnessAsPercentBL
+        topLeftRadius,
+        topLeftCornerSmoothing,
+        topRightRadius,
+        topRightCornerSmoothing,
+        bottomRightRadius,
+        bottomRightCornerSmoothing,
+        bottomLeftRadius,
+        bottomLeftCornerSmoothing
     )
 }
 
@@ -279,16 +280,34 @@ data class AbsoluteSmoothCornerShape(
  * all four corners.
  *
  * @param cornerRadius the size of the corners for the shape
- * @param smoothnessAsPercent a percentage representing how smooth the corners will be
+ * @param cornerSmoothing a percentage representing how smooth the corners will be
  */
-fun AbsoluteSmoothCornerShape(cornerRadius: Dp, smoothnessAsPercent: Int) =
+fun AbsoluteSmoothCornerShape(cornerRadius: Dp, cornerSmoothing: CornerSmoothing = CornerSmoothing.Continuous) =
     AbsoluteSmoothCornerShape(
-        cornerRadiusTL = cornerRadius,
-        smoothnessAsPercentTL = smoothnessAsPercent,
-        cornerRadiusTR = cornerRadius,
-        smoothnessAsPercentTR = smoothnessAsPercent,
-        cornerRadiusBR = cornerRadius,
-        smoothnessAsPercentBR = smoothnessAsPercent,
-        cornerRadiusBL = cornerRadius,
-        smoothnessAsPercentBL = smoothnessAsPercent
+        topLeftRadius = cornerRadius,
+        topLeftCornerSmoothing = cornerSmoothing,
+        topRightRadius = cornerRadius,
+        topRightCornerSmoothing = cornerSmoothing,
+        bottomRightRadius = cornerRadius,
+        bottomRightCornerSmoothing = cornerSmoothing,
+        bottomLeftRadius = cornerRadius,
+        bottomLeftCornerSmoothing = cornerSmoothing
     )
+
+
+
+@JvmInline
+value class CornerSmoothing(val percent: Int) {
+    init {
+        require(percent in 0..100) {
+            "Corner smoothing must be between 0 and 100"
+        }
+    }
+
+    companion object {
+        val Subtle = CornerSmoothing(25)
+        val Balanced = CornerSmoothing(50)
+        val Smooth = CornerSmoothing(75)
+        val Continuous = CornerSmoothing(100)
+    }
+}
