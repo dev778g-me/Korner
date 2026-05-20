@@ -71,7 +71,7 @@ kotlin {
 }
 mavenPublishing {
     coordinates(
-        groupId = "io.github.dev778g-me", artifactId = "korner", version = "1.0.0"
+        groupId = "io.github.dev778g-me", artifactId = "korner", version = "2.0.0"
     )
 
     pom {
