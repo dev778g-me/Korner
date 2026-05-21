@@ -27,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
+import androidx.compose.material3.ToggleButtonDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +41,9 @@ import kotlinx.coroutines.launch
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    MaterialTheme(
+
+    ) {
         var showContent by remember { mutableStateOf(false) }
 
 
@@ -65,6 +68,7 @@ fun App() {
 
         val scope = rememberCoroutineScope()
         Scaffold (
+            containerColor = MaterialTheme.colorScheme.surface,
             topBar = {
                 CenterAlignedTopAppBar(
                     title = {
@@ -111,6 +115,11 @@ fun App() {
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     ToggleButton(
+                        shapes = ToggleButtonDefaults.shapes(
+                            pressedShape = AbsoluteSmoothCornerShape(4.dp),
+                            checkedShape = AbsoluteSmoothCornerShape(8.dp),
+                            shape = AbsoluteSmoothCornerShape(24.dp)
+                        ),
                         modifier = Modifier.weight(1f),
                         checked = controlType == ControlType.Individual,
                         onCheckedChange = {
@@ -120,6 +129,11 @@ fun App() {
                         Text(ControlType.Individual.name)
                     }
                     ToggleButton(
+                        shapes = ToggleButtonDefaults.shapes(
+                            pressedShape = AbsoluteSmoothCornerShape(4.dp),
+                            checkedShape = AbsoluteSmoothCornerShape(8.dp),
+                            shape = AbsoluteSmoothCornerShape(24.dp)
+                        ),
                         modifier = Modifier.weight(1f),
                         checked = controlType == ControlType.Unified,
                         onCheckedChange = {
@@ -139,7 +153,7 @@ fun App() {
                             state = pagerState,
                             pageContent = { page ->
                                 Card(
-
+                             shape = AbsoluteSmoothCornerShape(24.dp),
                                     colors = CardDefaults.cardColors(
                                         containerColor = MaterialTheme.colorScheme.surfaceContainer
                                     )){
@@ -327,6 +341,7 @@ fun App() {
                             })
                     } else {
                         Card(
+                            shape = AbsoluteSmoothCornerShape(24.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = MaterialTheme.colorScheme.surfaceContainer
                             )){
