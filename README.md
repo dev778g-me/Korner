@@ -4,7 +4,7 @@ Smooth rounded corners and squircles for Compose Multiplatform.
 
 <p align="center">
   <img
-    src="https://raw.githubusercontent.com/racra/smooth-corner-rect-android-compose/master/art/header.png"
+    src="https://github.com/dev778g-me/Korner/blob/16c234d012a73b7172c98c62cd882b4c2a82a0c8/cover~3.jpg"
     width="100%"
     alt="Korner Preview"
   />
