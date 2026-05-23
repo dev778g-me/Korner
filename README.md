@@ -2,7 +2,15 @@
 
 Smooth rounded corners and squircles for Compose Multiplatform.
 
-Korner is a Compose Multiplatform library for creating beautiful smooth corner shapes (superellipses/squircles) with customizable radius and smoothness values for each individual corner.
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/racra/smooth-corner-rect-android-compose/master/art/header.png"
+    width="100%"
+    alt="Korner Preview"
+  />
+</p>
+
+Korner provides beautiful iOS-style smooth corner shapes and superellipses for Compose Multiplatform with fully customizable radius and smoothing values per corner.
 
 Supports:
 - Android
@@ -10,7 +18,7 @@ Supports:
 - Desktop
 - WASM/Web
 
-Based on the original smooth corner implementation from:
+Based on the original smooth corner implementation by racra:
 https://github.com/racra/smooth-corner-rect-android-compose
 
 ---
@@ -19,11 +27,26 @@ https://github.com/racra/smooth-corner-rect-android-compose
 
 - Smooth iOS-style corners
 - Superellipse / squircle rendering
-- Individual corner radius support
-- Custom smoothness per corner
-- Type-safe corner smoothing API
-- Compose Multiplatform compatible
+- Per-corner radius customization
+- Per-corner smoothing customization
+- Type-safe smoothing API
+- Compose Multiplatform support
 - Works with any Compose UI component
+- Lightweight and allocation-friendly
+
+---
+
+# Why Korner?
+
+Traditional rounded rectangles use simple circular arcs.
+
+Korner generates smooth superellipse-style curves with more natural transitions and better visual balance — similar to modern design systems used in iOS and contemporary UI frameworks.
+
+Compared to standard rounded corners, smooth corners:
+- feel more organic
+- reduce visual sharpness
+- improve large-radius aesthetics
+- create cleaner modern UI surfaces
 
 ---
 
@@ -45,9 +68,7 @@ dependencies {
 
 ---
 
-# Usage
-
-## Basic Smooth Corner Shape
+# Basic Usage
 
 ```kotlin
 Box(
@@ -65,7 +86,7 @@ Box(
 
 ---
 
-## Individual Corner Configuration
+# Per-Corner Configuration
 
 ```kotlin
 Box(
@@ -94,7 +115,7 @@ Box(
 
 # Corner Smoothing
 
-Korner uses a type-safe `CornerSmoothing` API.
+Korner uses a type-safe `CornerSmoothing` API:
 
 ```kotlin
 @JvmInline
@@ -117,54 +138,30 @@ value class CornerSmoothing(val percent: Int) {
 ## Presets
 
 | Preset | Value |
-|--------|--------|
-| `CornerSmoothing.Subtle` | `25` |
-| `CornerSmoothing.Balanced` | `50` |
-| `CornerSmoothing.Smooth` | `75` |
-| `CornerSmoothing.Continuous` | `100` |
+|---|---|
+| `Subtle` | `25` |
+| `Balanced` | `50` |
+| `Smooth` | `75` |
+| `Continuous` | `100` |
 
-You can also create custom smoothing values:
+Custom values are also supported:
 
 ```kotlin
 CornerSmoothing(65)
 ```
 
-Valid values range from `0..100`.
+Valid range: `0..100`
 
----
 
-# Why Korner?
 
-Traditional rounded rectangles use simple circular arcs.
-
-Korner generates smooth superellipse-style curves that look more natural and modern, similar to the corners used in iOS and modern design systems.
-
-This gives:
-- smoother transitions
-- more organic shapes
-- modern UI aesthetics
-- better visual balance
-
----
-
-# Platforms
-
-Korner supports Compose Multiplatform targets:
-
-| Platform | Supported |
-|----------|------------|
-| Android | ✅ |
-| iOS | ✅ |
-| Desktop | ✅ |
-| WASM/Web | ✅ |
 
 ---
 
 # Attribution
 
-Korner is based on and adapted from:
+Korner is adapted from:
 https://github.com/racra/smooth-corner-rect-android-compose
 
-Original work copyright (c) racra.
+Original work copyright © racra.
 
 Licensed under the MIT License.
